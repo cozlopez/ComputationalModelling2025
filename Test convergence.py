@@ -38,7 +38,7 @@ def compute_wave_magnitude(nmax, jmax):
     return wavemag
 
 # Grid sizes to test
-grid_sizes = [(40, 10), (40,14), (40, 15),(40, 16), (40, 17), (40, 18), (40, 19), (40, 20), (40, 21)]
+grid_sizes = [(40, 15),(40, 16), (40, 17), (40, 18), (40, 19), (40, 20), (40, 21)]
 wave_magnitudes = []
 
 # Compute wave magnitude for each grid size
@@ -50,6 +50,7 @@ for nmax, jmax in grid_sizes:
 # Plot wave magnitude versus jmax
 jmax_values = [size[1] for size in grid_sizes]
 plt.figure(figsize=(10, 6))
+#plt.ylim(0.3, 0.5)
 plt.plot(jmax_values, wave_magnitudes, marker='o', linestyle='-', color='r')
 plt.xlabel('jmax (Number of mesh points in j)')
 plt.ylabel('Wave Magnitude')
