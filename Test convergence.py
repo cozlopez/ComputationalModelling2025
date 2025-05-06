@@ -38,7 +38,7 @@ def compute_wave_magnitude(nmax, jmax):
     return wavemag
 
 # Grid sizes to test
-grid_sizes = [(40, 15),(40, 16), (40, 17), (40, 18), (40, 19), (40, 20), (40, 21)]
+grid_sizes = [(40, 15), (40, 21)]
 wave_magnitudes = []
 
 # Compute wave magnitude for each grid size
