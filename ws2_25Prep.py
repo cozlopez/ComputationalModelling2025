@@ -92,7 +92,7 @@ for elemIndex in range(mesh.nElem):
     # Compute the local value of the source term, f
     # ***** For the manufactured solution add the appropriate value below
     # ***** For e.g. sin(z) use math.sin(z)
-    fIP = 0.;
+    fIP = -(a**2+b**2)*math.sin(a*xIP)*math.sin(b*yIP)
 
     # Retrieve other values evaluated at this integration point (ip)
     # - perm is the value of permittivity at this ip
@@ -112,7 +112,7 @@ for elemIndex in range(mesh.nElem):
       elemVec[i] += ipWeight*psi[i]*fIP;   # Right-hand side of weak form
       for j in range(evDim):
         # ***** Change the line below for the desired left-hand side
-        elemMat[i,j] += ipWeight*perm*psi[i]*psi[j]
+        elemMat[i,j] += -ipWeight*(gradPsi[i][0]*gradPsi[j][0] + gradPsi[i][1]*gradPsi[j][1]) # Left-hand side of weak form
  
 
   #----------------------------------------------------------------
