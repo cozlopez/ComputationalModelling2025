@@ -30,8 +30,8 @@ targArea   = 0.10;               # Body target area
 x1         = -0.5;               # Forward boundary position
 x2         = 2.1;                # Rear boundary position
 y2         = 1.0;                # Upper boundary position
-nmax       = 400;                 # Number of mesh points in i
-jmax       = 200;                 # Number of mesh points in j
+nmax       = 800;                 # Number of mesh points in i
+jmax       = 100;                 # Number of mesh points in j
 
 plots      = 1;                  # Make plots if not zero
 stride     = 1;                  # Point skip rate for suface plot
