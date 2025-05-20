@@ -204,5 +204,28 @@ sp2 = fes.plotSoln(ax2,uexact-solVec,"Error")
 fig.colorbar(sp1,ax=ax1)
 fig.colorbar(sp2,ax=ax2)
 #plt.savefig('ndt.png',dpi=250)
+#plt.show()
+
+
+err1, err2, err3, err4 = 0.00394, 0.0010160694164109234, 0.00026494222394222804, 6.647262133732484e-05
+
+n_values = np.array([1, 2, 4, 8])
+errors = np.array([err1, err2, err3, err4])  # Replace with your RMS errors
+
+log_ninv = np.log10(1/n_values)
+log_err = np.log10(errors)
+
+plt.plot(log_ninv, log_err, 'o-', label='RMS Error')
+plt.xlabel('log10(1/n)')
+plt.ylabel('log10(RMS Error)')
+plt.title('Convergence Plot')
+plt.grid(True)
 plt.show()
 
+# Fit and print the observed order
+slope, intercept = np.polyfit(log_ninv, log_err, 1)
+plt.plot(log_ninv, slope*log_ninv + intercept, '--', label=f'Fit: slope={slope:.2f}')
+plt.legend()
+#plt.show()
+
+print(f"Observed order of accuracy (slope): {slope:.2f}")
