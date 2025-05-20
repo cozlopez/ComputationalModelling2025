@@ -30,8 +30,8 @@ targArea   = 0.10;               # Body target area
 x1         = -0.5;               # Forward boundary position
 x2         = 2.1;                # Rear boundary position
 y2         = 1.0;                # Upper boundary position
-nmax       = 400;                 # Number of mesh points in i
-jmax       = 200;                 # Number of mesh points in j
+nmax       = 800;                 # Number of mesh points in i
+jmax       = 100;                 # Number of mesh points in j
 
 plots      = 1;                  # Make plots if not zero
 stride     = 1;                  # Point skip rate for suface plot
@@ -90,18 +90,19 @@ for n in range(0, nmax):
 #=========================================================
 R = np.zeros((nmax,jmax));  # Note R(0,:)=0 for i=0;
 
+mu = (1/beta)*dx/dy;  # CFL number for upwind scheme
 #**************************************
 # Uncomment the "for" and "R" lines 
 # below then add code where requested
 #**************************************
-#for n in range(0, nmax-1):   # March from x=0 to x=2
+for n in range(0, nmax-1):   # March from x=0 to x=2
   
    # Apply boundary condition at y=0
-#   R[n+1,0] = **** ADD CODE HERE
+  R[n+1,0] = 2*Ufs*theta[n+1] 
    
    # Update interior values using a first-order accurate upwind scheme
-#  for j in range(1, jmax):
-#    R[n+1,j] = **** ADD CODE HERE
+  for j in range(1, jmax):
+    R[n+1,j] = R[n,j] - mu*(R[n,j] - R[n,j-1])
 
 
 
