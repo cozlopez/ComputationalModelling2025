@@ -23,9 +23,20 @@ import TriFEMLibD_InClass
 #=========================================================
 # Input parameters
 #=========================================================
-n=1                   # Mesh refinement factor
-dlx=1.0               # Delamination x location
+n=4                   # Mesh refinement factor
+dlx=0.0               # Delamination x location
 dll=0.3               # Delamination length
+
+um1_1 =  8.056776310684608
+um1_2 = 8.056870753290918
+um1_4 = 8.056897869916435
+
+obv_acc = (np.log((um1_4 - um1_2)/(um1_2-um1_1)))/(np.log(2))
+
+print("obv_acc = ", obv_acc)
+
+
+
 
 #=========================================================
 # Fixed parameters
@@ -119,7 +130,7 @@ for elemIndex in range(mesh.nElem):
       elemVec[i] += ipWeight*psi[i]*fIP;   # Right-hand side of weak form
       for j in range(evDim):
         # ***** Change the line below for the desired left-hand side
-        elemMat[i,j] -= ipWeight*perm; 
+        elemMat[i,j] -= ipWeight*(gradPsi[i][0]*gradPsi[j][0] + gradPsi[i][1]*gradPsi[j][1]) 
 
  
 
