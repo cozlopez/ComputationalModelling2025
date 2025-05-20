@@ -27,15 +27,19 @@ n=4                   # Mesh refinement factor
 dlx=0.0               # Delamination x location
 dll=0.3               # Delamination length
 
-um1_1 =  8.056776310684608
-um1_2 = 8.056870753290918
-um1_4 = 8.056897869916435
+um1_1 =  7.91247796594762
+um1_2 = 7.895581640582696
+um1_4 = 7.891776104053605
 
-obv_acc = (np.log((um1_4 - um1_2)/(um1_2-um1_1)))/(np.log(2))
+obv_acc = (np.log((um1_1 - um1_2)/(um1_2-um1_4)))/(np.log(2))
 
+
+
+obv_acc = np.round(obv_acc)
 print("obv_acc = ", obv_acc)
 
-
+err_4 = (um1_2 - um1_4)/(2**2-1)
+print("err_4 = ", err_4)
 
 
 #=========================================================
@@ -130,7 +134,7 @@ for elemIndex in range(mesh.nElem):
       elemVec[i] += ipWeight*psi[i]*fIP;   # Right-hand side of weak form
       for j in range(evDim):
         # ***** Change the line below for the desired left-hand side
-        elemMat[i,j] -= ipWeight*(gradPsi[i][0]*gradPsi[j][0] + gradPsi[i][1]*gradPsi[j][1]) 
+        elemMat[i,j] -= ipWeight*perm*(gradPsi[i][0]*gradPsi[j][0] + gradPsi[i][1]*gradPsi[j][1]) 
 
  
 
